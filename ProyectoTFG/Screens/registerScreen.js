@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { ToastAndroid } from 'react-native';
 import { render } from 'react-dom';
-import { Input } from 'react-native-elements';
+import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { scale } from '../Components/ScalingComps';
 
-const { heightmax } = Dimensions.get('window').height;
-const { widthmax } = Dimensions.get('window').width;
 
 export default class RegisterScreen extends Component {
     static navigationOptions = {
@@ -84,12 +83,13 @@ export default class RegisterScreen extends Component {
             inputStyle={{marginBottom:-8,fontSize:15}}
             //onChangeText={value => this.setState({ comment: value })}
             />
-          <Button
+          <Button 
+            containerStyle={{width:scale(150)}}
             title="Press me"
             color="#f194ff"
-            onPress={() => this.props.navigation.navigate('login')}
+            type="clear"
+            onPress={()=>this.props.navigation.navigate('login')}
           />
-  
         </View>
       );
     }

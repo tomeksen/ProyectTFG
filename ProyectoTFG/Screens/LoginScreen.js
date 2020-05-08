@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image ,Picker,Button} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image ,Picker} from 'react-native';
 import { ToastAndroid } from 'react-native';
 import { render } from 'react-dom';
-import { Input } from 'react-native-elements';
+import { Input,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { scale } from '../Components/ScalingComps';
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
@@ -69,7 +70,7 @@ render() {
       <View style={styles.container}>
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
           <Input
-            containerStyle={{width:260 , color:"black"}}
+            containerStyle={{width:scale(220) , color:"black"}}
             placeholder={"User"}
             leftIcon={
               <Icon
@@ -83,7 +84,7 @@ render() {
             onChangeText={value => this.setState({ comment: value })}
             />
             <Input
-            containerStyle={{width:260 , color:"black"}}
+            containerStyle={{width:scale(220) , color:"black"}}
             placeholder={"Password"}
             secureTextEntry={true}
             leftIcon={
@@ -97,12 +98,14 @@ render() {
             inputStyle={{marginBottom:-8,fontSize:15}}
             onChangeText={value => this.setState({ comment: value })}
             />
-
-          <Button
-          title="Press me"
-          color="#f194ff"
-          onPress={this.register}
+          <Button 
+            containerStyle={{width:scale(150)}}
+            title="Press me"
+            color="#f194ff"
+            type="clear"
+            onPress={this.register}
           />
+          <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={(this.register)}>Crear cuenta</Text>
         </View>
   
       </View>
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   button_register: {
-    width: 275,
+    width: scale(30),
     paddingTop: 8,
     paddingBottom: 8,
     borderRightWidth: 5,
