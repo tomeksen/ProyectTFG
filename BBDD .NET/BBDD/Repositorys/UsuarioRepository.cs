@@ -12,7 +12,7 @@ namespace BBDD.Repositorys
     {
         private MySqlConnection Connect()
         {
-            string connString = "server=localhost;Database=gareon;Uid=root;password'';";
+            string connString = "server=localhost;Database=gareon;Uid=root;password='';";
             MySqlConnection con = new MySqlConnection(connString);
             return con;
         }
