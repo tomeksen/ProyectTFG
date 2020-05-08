@@ -29,4 +29,20 @@ namespace BBDD.Models
         public List<CuentaJuego> CuentaJuegos { get; set; }
 
     }
+    public class UsuarioDTO
+    {
+        public UsuarioDTO()
+        {
+
+        }
+        public UsuarioDTO( string email, string nickname, string descripcion)
+        {
+            Email = email;
+            Nickname = nickname;
+            Descripcion = descripcion;
+        }
+        public string Email { get; set; }
+        public string Nickname { get; set; }
+        public string Descripcion { get; set; }
+    }
 }
