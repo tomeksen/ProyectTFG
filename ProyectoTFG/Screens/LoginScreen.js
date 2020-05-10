@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image ,Picker} from 'react-native';
-import { ToastAndroid } from 'react-native';
-import { render } from 'react-dom';
+import { StyleSheet, Text, View, Alert} from 'react-native';
+import {useEffect} from 'react';
 import { Input,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
+import runCrypto from '../Components/Encrypter';
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
+  
     static navigationOptions = {
         header: null
     };
-
+  
   /*constructor(props) {
     super(props);
     this.state = {
@@ -65,6 +66,8 @@ register = () => {
 }
 
 render() {
+    paco = runCrypto('paco124');
+    Alert.alert('hola :',paco);
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
