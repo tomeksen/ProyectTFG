@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image ,Picker} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image ,Picker,Alert} from 'react-native';
 import { ToastAndroid } from 'react-native';
 import { render } from 'react-dom';
 import { Input,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
+import sha256 from 'crypto-js/sha256';
+import CryptoJS from "crypto-js";
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
     static navigationOptions = {
         header: null
     };
-
-  /*constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
       user: "",
       password: "",
-      usuario: [],
-      login:global.login,
-      idioma:"esp"
-
-
     }
 
   }
 
-
+/*
   login = () => {
     fetch()
       .then(resp => resp.json())
@@ -65,7 +61,7 @@ register = () => {
 }
 
 render() {
-    const { navigate } = this.props.navigation;
+    Alert.alert(CryptoJS.sha256("paco1234"));
     return (
       <View style={styles.container}>
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
