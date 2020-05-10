@@ -14,7 +14,7 @@ const PrincipalScreens = createStackNavigator(
     register: RegisterScreen
   },
   {
-    initialRouteName:"login"
+    initialRouteName:"register"
   }
 );
 

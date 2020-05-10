@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import { Input,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
-import runCrypto from '../Components/Encrypter';
+import runCrypto, { CryptoComprobador } from '../Components/Encrypter';
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
@@ -66,9 +66,6 @@ register = () => {
 }
 
 render() {
-    paco = runCrypto('paco124');
-    Alert.alert('hola :',paco);
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
@@ -106,9 +103,9 @@ render() {
             title="Press me"
             color="#f194ff"
             type="clear"
-            onPress={this.register}
+            onPress={()=>this.props.navigation.navigate('register')}
           />
-          <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={(this.register)}>Crear cuenta</Text>
+          <Text style={{fontSize:15,marginTop:25,color:'blue'}} >Crear cuenta</Text>
         </View>
   
       </View>

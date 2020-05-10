@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import { ToastAndroid } from 'react-native';
-import { render } from 'react-dom';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
+import {registrarUsu} from '../Components/Funciones';
+
 
 
 export default class RegisterScreen extends Component {
@@ -15,10 +15,9 @@ export default class RegisterScreen extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        name: "",
-        user: "",
+        Nickname: "",
         password: "",
-        idMarca:"",
+        Email:"",
       }
     }
   
@@ -49,6 +48,7 @@ export default class RegisterScreen extends Component {
         });
   
     }*/
+    
   
     render() {
       return (
@@ -56,7 +56,21 @@ export default class RegisterScreen extends Component {
         <View style={styles.container}>
           <Input
             containerStyle={{width:260, color:"black"}}
-            placeholder={"User"}
+            placeholder={"Nickname"}
+            leftIcon={
+              <Icon
+                name='user'
+                size={20}
+                color='black'
+              />
+            }
+            leftIconContainerStyle={{marginRight:8,marginLeft:8,marginBottom:-3}}
+            inputStyle={{marginBottom:-8,fontSize:15}}
+            onChangeText={value => this.setState({ Nickname: value })}
+            />
+            <Input
+            containerStyle={{width:260 , color:"black"}}
+            placeholder={"Email"}
             leftIcon={
               <Icon
                 name='envelope-o'
@@ -64,9 +78,9 @@ export default class RegisterScreen extends Component {
                 color='black'
               />
             }
-            leftIconContainerStyle={{marginRight:8,marginLeft:5,marginBottom:-3}}
+            leftIconContainerStyle={{marginRight:9,marginLeft:7,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            //onChangeText={value => this.setState({ comment: value })}
+            onChangeText={value => this.setState({ password : value })}
             />
             <Input
             containerStyle={{width:260 , color:"black"}}
@@ -81,15 +95,18 @@ export default class RegisterScreen extends Component {
             }
             leftIconContainerStyle={{marginRight:9,marginLeft:9,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            //onChangeText={value => this.setState({ comment: value })}
+            onChangeText={value => this.setState({ Email : value })}
             />
           <Button 
             containerStyle={{width:scale(150)}}
             title="Press me"
             color="#f194ff"
             type="clear"
-            onPress={()=>this.props.navigation.navigate('login')}
+            onPress={()=> registrarUsu(this.state.password,this.state.Email,this.state.Nickname)}
           />
+          <Text>{this.state.Nickname}</Text>
+          <Text>{this.state.password}</Text>
+          <Text>{this.state.Email}</Text>
         </View>
       );
     }

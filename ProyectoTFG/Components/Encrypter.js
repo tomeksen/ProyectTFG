@@ -1,13 +1,20 @@
 import * as Crypto from 'expo-crypto';
-import {getPassWithUser} from './ConexionBBDD';
+import {getPassWithUser,CrearUsuario,ComprobarEmail} from './ConexionBBDD';
+import { Alert } from 'react-native';
 
-export async function runCrypto(PassARegistrar,Correo,contra,Nick,desc) {
+
+export async function runCrypto(PassARegistrar,Correo,Nick,desc) {
   const digest = await Crypto.digestStringAsync(
     Crypto.CryptoDigestAlgorithm.SHA256,
     PassARegistrar
   );
-  Alert.alert('Digest: ', digest);
+  if(ComprobarEmail(Correo)=='true'){
+  CrearUsuario(Correo,digest,Nick,desc);
+  }else{
+    Alert.alert('el correo esta en uso')
+  }
 }
+
 export async function CryptoComprobador(palabraComprobar,Email) {
     const digest = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
