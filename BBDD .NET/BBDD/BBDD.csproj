@@ -309,6 +309,10 @@
     <Compile Include="Migrations\20200508103540_m2.designer.cs">
       <DependentUpon>20200508103540_m2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200511130955_m3.cs" />
+    <Compile Include="Migrations\20200511130955_m3.designer.cs">
+      <DependentUpon>20200511130955_m3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\GareonContextModelSnapshot.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

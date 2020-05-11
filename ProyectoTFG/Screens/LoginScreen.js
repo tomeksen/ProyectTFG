@@ -105,7 +105,7 @@ render() {
             type="clear"
             onPress={()=>this.props.navigation.navigate('register')}
           />
-          <Text style={{fontSize:15,marginTop:25,color:'blue'}} >Crear cuenta</Text>
+          <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={()=>this.props.navigation.navigate('register')}>Crear cuenta</Text>
         </View>
   
       </View>

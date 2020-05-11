@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import { Alert } from 'react-native';
 const url= 'http://10.0.2.2:44377/';
 const pass='';
-
 //Función conseguir contraseña
 function getPassWithUser(Email)
 {
@@ -12,7 +11,7 @@ fetch(url+'api/Usuario?Email='+Email)
     pass= data[0].Password;
 })
 .catch((error)=>{
-    console.error(error);
+  console.error(error);
 })
 return pass;
 }
@@ -36,24 +35,24 @@ export function CrearUsuario(Correo,contra,Nick,desc){
         })
       })
       .catch(error =>console.error('Error: ',error))
-      .then(response=> console.log('Success: ', response))
+      .then(response=> console.log('Success: '+json.stringify(response)))
       ;
 }
-//funcion para ver que un usuario no este repetido
+//funcion para ver que un correo no este repetido
 export function ComprobarEmail(Email)
 {
-  comprobador=false;
+  usuario=[];
 fetch(url+'api/Usuario?Email='+Email)
 .then((Response)=>Response.json())
 .then(data=>{
-  if(data[0]==""){
-    
-  }else{
-    comprobador=true;
-  }
+  usuario=data;
 })
 .catch((error)=>{
     console.error(error);
 })
-return comprobador;
+if(usuario.length==0){
+  return true;
+}else{
+  return false;
+}
 }

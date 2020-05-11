@@ -8,8 +8,8 @@ export async function runCrypto(PassARegistrar,Correo,Nick,desc) {
     Crypto.CryptoDigestAlgorithm.SHA256,
     PassARegistrar
   );
-  if(ComprobarEmail(Correo)=='true'){
-  CrearUsuario(Correo,digest,Nick,desc);
+  if(ComprobarEmail(Correo)){
+    CrearUsuario(Correo,digest,Nick,desc);
   }else{
     Alert.alert('el correo esta en uso')
   }

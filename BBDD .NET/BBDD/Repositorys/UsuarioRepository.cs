@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Globalization;
 
 namespace BBDD.Repositorys
 {
@@ -42,6 +43,15 @@ namespace BBDD.Repositorys
                 return null;
             }
         }
+        internal Usuario getWithEmail(string correo)
+        {
+            Usuario usu = new Usuario();
+            using (GareonContext context=new GareonContext())
+            {
+                usu = context.Usuarios.Where(x => x.Email == correo).FirstOrDefault();
+            }
+            return usu;
+        }
         internal List<UsuarioDTO> RetrieveDTO()
         {
             MySqlConnection con = Connect();
@@ -67,6 +77,58 @@ namespace BBDD.Repositorys
                 Debug.WriteLine("error de conexion");
                 return null;
             }
+        }
+        public UsuarioDTO ToDTO(Usuario usuario)
+        {
+            return new UsuarioDTO(usuario.Email, usuario.Nickname,usuario.Descripcion);
+        }
+        internal List<UsuarioDTO> GetUsuariosDTO()
+        {
+            List<UsuarioDTO> usus = new List<UsuarioDTO>();
+            using (GareonContext context=new GareonContext())
+            {
+                usus = context.Usuarios.Select(x => ToDTO(x)).ToList();
+            }
+            return usus;
+        }
+        internal UsuarioDTO GetUsuarioDTO(string correo)
+        {
+            UsuarioDTO usu = new UsuarioDTO();
+            using (GareonContext context= new GareonContext())
+            {
+                usu = context.Usuarios.Select(x=> ToDTO(x)).Where(y => y.Email == correo).FirstOrDefault();
+            }
+            return usu;
+        }
+        internal string Save(Usuario usu)
+        {
+            CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
+            cullInfo.NumberFormat.NumberDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            cullInfo.NumberFormat.PercentDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            System.Threading.Thread.CurrentThread.CurrentCulture = cullInfo;
+
+            List<Usuario> usuarios = new List<Usuario>();
+            using (GareonContext context = new GareonContext())
+            {
+                usuarios = context.Usuarios.ToList();
+            }
+            for(int i=0;i< usuarios.Count; i++)
+            {
+                if(usuarios[i].Email== usu.Email)
+                {
+                    return "Este correo esta usado";
+                }
+                if (usuarios[i].Nickname == usu.Nickname)
+                {
+                    return "este nickname esta en uso";
+                }
+            }
+            GareonContext context2 = new GareonContext();
+            context2.Usuarios.Add(usu);
+            context2.SaveChanges();
+            return "El usuario se ha creado";
         }
     }
 }

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
-import {registrarUsu} from '../Components/Funciones';
+import {runCrypto} from '../Components/Encrypter';
+import { ComprobarEmail } from '../Components/ConexionBBDD';
 
-
-
+function registrarUsu(pass,corr,nck){
+  runCrypto(pass,corr,nck,"");
+}
+//this.props.navigation.navigate('login');
 export default class RegisterScreen extends Component {
     static navigationOptions = {
       header: null
@@ -18,10 +21,9 @@ export default class RegisterScreen extends Component {
         Nickname: "",
         password: "",
         Email:"",
-      }
+    };
     }
-  
-  
+
     /*registerUser = () => {
       fetch()
         .then(resp => resp.json())
@@ -48,12 +50,21 @@ export default class RegisterScreen extends Component {
         });
   
     }*/
-    
+    register=()=>{
+      this.setState({Email:""})
+      this.setState({password:""})
+      this.setState({Nickname:""})
+      this.props.navigation.navigate('login')}
   
     render() {
       return (
   
         <View style={styles.container}>
+          <Icon 
+          name='arrow-left'
+          size={30}
+          onPress={()=>this.props.navigation.navigate('login')}
+          />
           <Input
             containerStyle={{width:260, color:"black"}}
             placeholder={"Nickname"}
@@ -66,6 +77,7 @@ export default class RegisterScreen extends Component {
             }
             leftIconContainerStyle={{marginRight:8,marginLeft:8,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
+            value={this.state.Nickname}
             onChangeText={value => this.setState({ Nickname: value })}
             />
             <Input
@@ -80,7 +92,8 @@ export default class RegisterScreen extends Component {
             }
             leftIconContainerStyle={{marginRight:9,marginLeft:7,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            onChangeText={value => this.setState({ password : value })}
+            value={this.state.Email}
+            onChangeText={value => this.setState({ Email : value })}
             />
             <Input
             containerStyle={{width:260 , color:"black"}}
@@ -95,14 +108,18 @@ export default class RegisterScreen extends Component {
             }
             leftIconContainerStyle={{marginRight:9,marginLeft:9,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            onChangeText={value => this.setState({ Email : value })}
+            value={this.state.password}
+            onChangeText={value => this.setState({ password : value })}
             />
           <Button 
             containerStyle={{width:scale(150)}}
             title="Press me"
             color="#f194ff"
             type="clear"
-            onPress={()=> registrarUsu(this.state.password,this.state.Email,this.state.Nickname)}
+            onPress={()=> {
+              registrarUsu(this.state.password,this.state.Email,this.state.Nickname)
+              this.register()
+            }}
           />
           <Text>{this.state.Nickname}</Text>
           <Text>{this.state.password}</Text>
