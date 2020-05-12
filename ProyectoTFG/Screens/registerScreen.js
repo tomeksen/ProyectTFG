@@ -7,7 +7,7 @@ import {runCrypto} from '../Components/Encrypter';
 import { ComprobarEmail } from '../Components/ConexionBBDD';
 
 function registrarUsu(pass,corr,nck){
-  runCrypto(pass,corr,nck,"");
+  
 }
 //this.props.navigation.navigate('login');
 export default class RegisterScreen extends Component {
@@ -50,11 +50,15 @@ export default class RegisterScreen extends Component {
         });
   
     }*/
-    register=()=>{
+    register=async()=>{
+      var confirmer=await runCrypto(this.state.password,this.state.Email,this.state.Nickname,"");
+      if(confirmer){
       this.setState({Email:""})
       this.setState({password:""})
       this.setState({Nickname:""})
       this.props.navigation.navigate('login')}
+    }
+      
   
     render() {
       return (
@@ -117,7 +121,6 @@ export default class RegisterScreen extends Component {
             color="#f194ff"
             type="clear"
             onPress={()=> {
-              registrarUsu(this.state.password,this.state.Email,this.state.Nickname)
               this.register()
             }}
           />

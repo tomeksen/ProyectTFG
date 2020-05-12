@@ -1,20 +1,24 @@
 import { Alert } from 'react-native';
 const url= 'http://10.0.2.2:44377/';
-const pass='';
 //Función conseguir contraseña
-function getPassWithUser(Email)
+export async function getPassWithUser(Email)
 {
 pass='';
-fetch(url+'api/Usuario?Email='+Email)
-.then((Response)=>Response.json())
-.then(data=>{
-    pass= data[0].Password;
-})
-.catch((error)=>{
-  console.error(error);
-})
-return pass;
+correo='';
+let response= await fetch(url+'api/Usuario?Email='+Email);
+let responseJson= await response.json();
+if(responseJson!=null){
+  pass= responseJson.Password;
+  correo= responseJson.Email;
+  return {
+    first: pass,
+    second: correo
+  };
+}else{
+  Alert.alert('no existe ese correo');
 }
+}
+
 
 //Función que Registra un usuario
 export function CrearUsuario(Correo,contra,Nick,desc){
@@ -39,10 +43,10 @@ export function CrearUsuario(Correo,contra,Nick,desc){
       ;
 }
 //funcion para ver que un correo no este repetido
-export function ComprobarEmail(Email)
+/*export async function ComprobarEmail(Email)
 {
   usuario=[];
-fetch(url+'api/Usuario?Email='+Email)
+await fetch(url+'api/Usuario?Email='+Email)
 .then((Response)=>Response.json())
 .then(data=>{
   usuario=data;
@@ -54,5 +58,15 @@ if(usuario.length==0){
   return true;
 }else{
   return false;
+}
+}*/
+export async function ComprobarEmail(Email)
+{
+let response= await fetch(url+'api/Usuario?Email='+Email);
+let responseJson= await response.json();
+if(responseJson==null){
+  return true;
+}else{
+  Alert.alert('El correo esta en uso');
 }
 }

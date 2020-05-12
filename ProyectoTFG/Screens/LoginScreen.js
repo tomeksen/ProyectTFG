@@ -13,21 +13,16 @@ export default class LoginScreen extends Component {
         header: null
     };
   
-  /*constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-      user: "",
+      Email: "",
       password: "",
-      usuario: [],
-      login:global.login,
-      idioma:"esp"
-
-
     }
 
   }
 
-
+/*
   login = () => {
     fetch()
       .then(resp => resp.json())
@@ -60,6 +55,15 @@ export default class LoginScreen extends Component {
     this.setState({login: global.login})
   }
   */
+  login=async ()=>{
+    var confirmador = await CryptoComprobador(this.state.password,this.state.Email);
+    this.setState({Email:""})
+    this.setState({password:""})
+  if(confirmador=='true'){
+    this.props.navigation.navigate('HomeBottomNavigatorUsers');
+  }
+  //
+ }
 
 register = () => {
   this.props.navigation.navigate('register');
@@ -71,7 +75,7 @@ render() {
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
           <Input
             containerStyle={{width:scale(220) , color:"black"}}
-            placeholder={"User"}
+            placeholder={"Email"}
             leftIcon={
               <Icon
                 name='envelope-o'
@@ -81,7 +85,8 @@ render() {
             }
             leftIconContainerStyle={{marginRight:9,marginLeft:5,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            onChangeText={value => this.setState({ comment: value })}
+            value={this.state.Email}
+            onChangeText={value => this.setState({ Email: value })}
             />
             <Input
             containerStyle={{width:scale(220) , color:"black"}}
@@ -96,14 +101,15 @@ render() {
             }
             leftIconContainerStyle={{marginRight:9,marginLeft:9,marginBottom:-3}}
             inputStyle={{marginBottom:-8,fontSize:15}}
-            onChangeText={value => this.setState({ comment: value })}
+            value={this.state.password}
+            onChangeText={value => this.setState({ password: value })}
             />
           <Button 
             containerStyle={{width:scale(150)}}
-            title="Press me"
+            title="Log In"
             color="#f194ff"
             type="clear"
-            onPress={()=>this.props.navigation.navigate('register')}
+            onPress={()=>this.login()}
           />
           <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={()=>this.props.navigation.navigate('register')}>Crear cuenta</Text>
         </View>

@@ -8,10 +8,10 @@ export async function runCrypto(PassARegistrar,Correo,Nick,desc) {
     Crypto.CryptoDigestAlgorithm.SHA256,
     PassARegistrar
   );
-  if(ComprobarEmail(Correo)){
-    CrearUsuario(Correo,digest,Nick,desc);
+  if(await ComprobarEmail(Correo)){
+    CrearUsuario(Correo, digest, Nick, desc);
+    return true;
   }else{
-    Alert.alert('el correo esta en uso')
   }
 }
 
@@ -20,6 +20,17 @@ export async function CryptoComprobador(palabraComprobar,Email) {
       Crypto.CryptoDigestAlgorithm.SHA256,
       palabraComprobar
     );
-    Alert.alert('Digest: ', digest);
-    hola = getPassWithUser(Email);
+    var todos = getPassWithUser(Email);
+    getcorreo=(await todos).second;
+    getpass=(await todos).first;
+    if(getcorreo==''){
+      Alert.alert('el correo no es valido');
+    }else if(getcorreo==Email){
+      if(getpass==digest){
+        Alert.alert('se ha logueado correctamente')
+        return 'true';
+      }else{
+        Alert.alert('la contraseña es incorrecta')
+      }
+    }
   }
