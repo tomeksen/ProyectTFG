@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert,Image,FlatList,SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, Alert,Image,FlatList,SafeAreaView,ActivityIndicator} from 'react-native';
 import {useEffect} from 'react';
 import { Input,Button,ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
 import {orderBy} from 'lodash';
-
+import {ModalComponent} from '../Components/Modal';
 
 export default class Noticias extends Component {
   
@@ -18,25 +18,45 @@ export default class Noticias extends Component {
     this.state = {
         isLoading:true,
         isError:false,
-        data:[]
+        data:[],
+        setModalVisible:false,
+        modalArticleData:{}
     }
     this.getNews();
   }
+
+  handleItemDataOnPress=async(articleData)=>{
+    this.setState({
+      setModalVisible:true,
+      modalArticleData: articleData
+    })
+  }
+  handleModalClose=async()=>{
+    this.setState({
+      setModalVisible:false,
+      modalArticleData:{}
+    })
+
+  }
+
   getNews = async () => {
         let articles= await fetch('http://newsapi.org/v2/everything?'+'q=juegos&'+'language=es&'+'pageSize=10&'+'apiKey=b51e135495fe48b6ba1fc1e575f9278d')
         let result= await articles.json()
         articles=null;
         let iwant= orderBy(result.articles,'publisedAt','desc');
-        this.setState({data: iwant})
+        this.setState({data: iwant, isLoading:false})
    }
 
 //<Text style={{fontSize:15,marginTop:25,color:'blue'}} >Bienvenido a Noticias</Text>
 
 render() {
-    return (
-      <View style={styles.container}>
-          <Text style={{fontSize:20,marginTop:20}}>Noticias del dia</Text>
-        <FlatList
+  let view = this.state.isLoading ? (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <ActivityIndicator animating={this.state.isLoading} color="#00f0ff" />
+      <Text style={{marginTop: 10}} children="Please Wait.." />
+    </View>
+  ) : (
+    <FlatList
             style={{alignSelf:"center",width:'100%',backgroundColor:'#645754'}}
             data={this.state.data}
             renderItem={({item}) => 
@@ -45,11 +65,23 @@ render() {
             title={item.title}
             leftAvatar={{size:"large",source:{uri:item.urlToImage}}}
             bottomDivider
+            onPress={()=>this.handleItemDataOnPress(item)}
             />
 
         }
         keyExtractor={(item,index)=> index.toString()}
-        />  
+        /> 
+  )
+    return (
+      <View style={styles.container}>
+        <View style={{flex:1,width:'100%',margin:15,marginBottom:0}}>
+          {view}
+        </View>
+          <ModalComponent
+          showModal={this.state.setModalVisible}
+          articleData={this.state.modalArticleData}
+          onClose={this.handleModalClose}
+          />
       </View>
     )
     
