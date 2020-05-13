@@ -1,4 +1,5 @@
 ﻿using BBDD.Models;
+using BBDD.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,11 @@ namespace BBDD.Controllers
         }
 
         // POST: api/CuentasJuego
-        public void Post([FromBody]string value)
+        public string Post([FromBody]CuentaJuego cuentaJuego)
         {
+            var repo = new CuentaJuegoRepository();
+            string respuesta = repo.Save(cuentaJuego);
+            return respuesta;
         }
 
         // PUT: api/CuentasJuego/5

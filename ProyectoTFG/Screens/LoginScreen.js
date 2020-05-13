@@ -60,7 +60,7 @@ export default class LoginScreen extends Component {
     this.setState({Email:""})
     this.setState({password:""})
   if(confirmador=='true'){
-    this.props.navigation.navigate('HomeBottomNavigatorUsers');
+    this.props.navigation.navigate('HomeBottomNavigatorUsers',{data:this.state.Email});
   }
   //
  }

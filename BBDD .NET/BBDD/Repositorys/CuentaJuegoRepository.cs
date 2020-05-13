@@ -5,6 +5,7 @@ using System.Web;
 using BBDD.Models;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace BBDD.Repositorys
 {
@@ -41,6 +42,25 @@ namespace BBDD.Repositorys
                 Debug.WriteLine("error de conexion");
                 return null;
             }
+        }
+        internal string Save(CuentaJuego cuentaJuego)
+        {
+            CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
+            cullInfo.NumberFormat.NumberDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            cullInfo.NumberFormat.PercentDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            System.Threading.Thread.CurrentThread.CurrentCulture = cullInfo;
+
+            List<CuentaJuego> cuentas = new List<CuentaJuego>();
+            using (GareonContext context = new GareonContext())
+            {
+                cuentas = context.CuentaJuegos.ToList();
+            }
+            GareonContext context2 = new GareonContext();
+            context2.CuentaJuegos.Add(cuentaJuego);
+            context2.SaveChanges();
+            return "El usuario se ha creado";
         }
     }
 }

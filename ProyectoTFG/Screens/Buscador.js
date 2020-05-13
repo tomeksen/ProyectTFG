@@ -9,7 +9,10 @@ export default class Buscador extends Component{
   constructor(props) {
     super(props);
     this.state = {
-        
+        nickname:"",
+        email:"",
+        Descripcion="",
+        cuentasjuegos=null
     }
 
   }
