@@ -74,7 +74,7 @@ render() {
       <View style={styles.container}>
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
           <Input
-            containerStyle={{width:scale(220) , color:"black"}}
+            containerStyle={{width:scale(220)}}
             placeholder={"Email"}
             leftIcon={
               <Icon
@@ -89,7 +89,7 @@ render() {
             onChangeText={value => this.setState({ Email: value })}
             />
             <Input
-            containerStyle={{width:scale(220) , color:"black"}}
+            containerStyle={{width:scale(220)}}
             placeholder={"Password"}
             secureTextEntry={true}
             leftIcon={

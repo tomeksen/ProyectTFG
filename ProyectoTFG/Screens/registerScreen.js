@@ -70,7 +70,7 @@ export default class RegisterScreen extends Component {
           onPress={()=>this.props.navigation.navigate('login')}
           />
           <Input
-            containerStyle={{width:260, color:"black"}}
+            containerStyle={{width:260}}
             placeholder={"Nickname"}
             leftIcon={
               <Icon
@@ -85,7 +85,7 @@ export default class RegisterScreen extends Component {
             onChangeText={value => this.setState({ Nickname: value })}
             />
             <Input
-            containerStyle={{width:260 , color:"black"}}
+            containerStyle={{width:260 }}
             placeholder={"Email"}
             leftIcon={
               <Icon
@@ -100,7 +100,7 @@ export default class RegisterScreen extends Component {
             onChangeText={value => this.setState({ Email : value })}
             />
             <Input
-            containerStyle={{width:260 , color:"black"}}
+            containerStyle={{width:260}}
             placeholder={"Password"}
             secureTextEntry={true}
             leftIcon={
