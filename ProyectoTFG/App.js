@@ -10,6 +10,7 @@ import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/registerScreen';
 import Home from './Screens/Home';
 import Noticias from './Screens/Noticias';
+import perfil from './Screens/perfil';
 
 const LoginScreens = createStackNavigator(
   {
@@ -41,16 +42,16 @@ const NoticiasTab = {
   }),
 };
 
-/*const mapScreensTab = {
-  screen: mapScreens,
+const perfilTab = {
+  screen: perfil,
   navigationOptions: ({ navigation }) => ({
     title: 'Map',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      return <Ionicons name={'map'} size={25} color={tintColor} />;
+      return <Ionicons name={'user'} size={25} color={tintColor} />;
     },
   }),
 };
-
+/*
 const loginScreensTab = {
   screen: LoginScreens,
   navigationOptions: ({ navigation }) => ({
@@ -74,11 +75,13 @@ const cerveceroScreensTab = {
 export const HomeBottomNavigatorUsers = createBottomTabNavigator(
   {
     homeScreensTab,
-    NoticiasTab
+    NoticiasTab,
+    perfilTab
   },
   {
     navigationOptions:{
       header:null,
+      
     },
       tabBarOptions: {
         showLabel: true,

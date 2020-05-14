@@ -19,7 +19,8 @@ export default class LoginScreen extends Component {
       Email: "",
       password: "",
     }
-
+    //this.setState({Email:""})
+    //this.setState({password:""})
   }
 
 /*
@@ -57,10 +58,10 @@ export default class LoginScreen extends Component {
   */
   login=async ()=>{
     var confirmador = await CryptoComprobador(this.state.password,this.state.Email);
-    this.setState({Email:""})
-    this.setState({password:""})
   if(confirmador=='true'){
-    this.props.navigation.navigate('HomeBottomNavigatorUsers',{data:this.state.Email});
+    global.correoUsu=this.state.Email
+    this.props.navigation.navigate('HomeBottomNavigatorUsers', { data : this.state.Email });
+    
   }
   //
  }
