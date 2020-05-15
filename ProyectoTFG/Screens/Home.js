@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert} from 'react-native';
+import { StyleSheet, Text, View, Alert,FlatList,ActivityIndicator} from 'react-native';
 import {useEffect} from 'react';
-import { Input,Button } from 'react-native-elements';
+import { Input,Button,ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
-
+import {ObtenerUsus} from '../Components/ConexionBBDD';
+import {ModalProf} from '../Components/ModalHomeProf';
 export default class Home extends Component {
   
     static navigationOptions = {
@@ -13,22 +14,77 @@ export default class Home extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { 
+      Descripcion:"",
+      data:[],
+      nickname:"",
+      isLoading:true,
+      setModalVisible:false,
+      modalProfileData:{}
     }
+    this.getusers();
+  }
+
+  handleItemDataOnPress=async(Profiledata)=>{
+    this.setState({
+      setModalVisible:true,
+      modalProfileData: Profiledata
+    })
+  }
+
+  handleModalClose=async()=>{
+    this.setState({
+      setModalVisible:false,
+      modalProfileData:{}
+    })
 
   }
 
-
+getusers= async ()=>{
+  let response= await fetch('http://10.0.2.2:44377/api/Usuario');
+  let responseJson= await response.json();
+  this.setState({
+    data: responseJson,
+    isLoading:false
+  })
+}
 
 
 render() {
+  let view = this.state.isLoading ? (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <ActivityIndicator animating={this.state.isLoading} color="#00f0ff" />
+      <Text style={{marginTop: 10}} children="Please Wait.." />
+    </View>
+  ) : (
+    <FlatList
+              style={{alignSelf:"center",width:'100%',backgroundColor:'#645754'}}
+              data={this.state.data}
+              renderItem={({item}) => {
+              if(item.Email!=global.correoUsu){
+                return <ListItem
+                containerStyle={{flex:1,backgroundColor:'#645754'}}
+                title={item.Nickname}
+                subtitle={item.Descripcion}
+                bottomDivider
+                onPress={()=>this.handleItemDataOnPress(item)}
+                />
+              }
+            }
+              }
+              keyExtractor={(item,index)=> index.toString()}
+          /> 
+  )
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
-
-          <Text style={{fontSize:15,marginTop:25,color:'blue'}} >Bienvenido al home</Text>
+      <View style={{flex:1,alignItems:"center"}}>
+        <View style={{width:'100%'}}>
+          {view}
         </View>
-  
+        <ModalProf
+          showModal={this.state.setModalVisible}
+          profiledata={this.state.modalProfileData}
+          onClose={this.handleModalClose}
+        />
       </View>
     )
     
@@ -37,77 +93,3 @@ render() {
   
 
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: "white",
-  },
-
-  button: {
-    width: 500,
-  },
-
-  button_register: {
-    width: scale(30),
-    paddingTop: 8,
-    paddingBottom: 8,
-    borderRightWidth: 5,
-    borderLeftWidth: 5,
-    borderRightColor: '#dba470',
-    borderLeftColor: '#dba470',
-    marginTop: 7,
-    borderRadius: 10,
-    backgroundColor: "#f6e8cb"
-  },
-
-  button_invitado: {
-    width: 275,
-    paddingTop: 8,
-    paddingBottom: 8,
-    borderRightWidth: 5,
-    borderLeftWidth: 5,
-    borderRightColor: '#dba470',
-    borderLeftColor: '#dba470',
-    marginTop: 7,
-    borderRadius: 10,
-    backgroundColor: "#f6e8cb",
-  },
-
-  buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: 'black',
-    fontWeight: 'bold'
-  },
-
-  buttonText_register: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'black',
-    fontWeight: 'bold'
-  },
-
-
-  textInput: {
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1,
-    width: 250,
-    fontSize: 15,
-    color: 'black',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    margin: 5,
-    padding: 5
-
-  },
-  imageStyle: {
-    width: 240,
-    height: 240,
-    marginBottom: 10,
-    alignSelf: 'center'
-  }
-});

@@ -16,7 +16,7 @@ export default class Amigos extends Component{
   render(){
       return(
           <View>
-              
+            
           </View>
       )
   }

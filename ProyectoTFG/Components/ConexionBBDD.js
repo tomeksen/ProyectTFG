@@ -18,7 +18,16 @@ if(responseJson!=null){
   Alert.alert('no existe ese correo');
 }
 }
-
+//funcion obtener usuarios
+export async function ObtenerUsus(){
+  let response= await fetch(url+'api/Usuario');
+  let responseJson= await response.json();
+  if(responseJson!=null){
+    return responseJson;
+  }else{
+    Alert.alert('no hay ninguno')
+  }
+}
 
 //Función que Registra un usuario
 export function CrearUsuario(Correo,contra,Nick,desc){

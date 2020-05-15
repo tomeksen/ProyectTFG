@@ -47,7 +47,7 @@ const perfilTab = {
   navigationOptions: ({ navigation }) => ({
     title: 'Map',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      return <Ionicons name={'user'} size={25} color={tintColor} />;
+      return <Ionicons name={'info'} size={25} color={tintColor} />;
     },
   }),
 };
