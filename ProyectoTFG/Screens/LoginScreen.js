@@ -5,6 +5,7 @@ import { Input,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
 import runCrypto, { CryptoComprobador } from '../Components/Encrypter';
+import {getidWithEmail} from '../Components/ConexionBBDD';
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
@@ -18,6 +19,7 @@ export default class LoginScreen extends Component {
     this.state = {
       Email: "",
       password: "",
+      idUsu:0,
     }
     //this.setState({Email:""})
     //this.setState({password:""})
@@ -59,7 +61,9 @@ export default class LoginScreen extends Component {
   login=async ()=>{
     var confirmador = await CryptoComprobador(this.state.password,this.state.Email);
   if(confirmador=='true'){
+    let id= await getidWithEmail(this.state.Email)
     global.correoUsu=this.state.Email
+    global.idUsuario=id
     this.props.navigation.navigate('HomeBottomNavigatorUsers', { data : this.state.Email });
     
   }

@@ -1,6 +1,16 @@
 import { Alert } from 'react-native';
 const url= 'http://10.0.2.2:44377/';
 //Función conseguir contraseña
+export async function getidWithEmail(Email){
+  let response= await fetch(url+'api/Usuario?Email='+Email);
+  let responseJson= await response.json();
+  if(responseJson!=null){
+    id= responseJson.UsuarioId;
+    return id;
+  }else{
+    Alert.alert('no existe ese correo');
+  }
+}
 export async function getPassWithUser(Email)
 {
 pass='';
@@ -70,7 +80,35 @@ export async function ObtenerUsus(){
     Alert.alert('no hay ninguno')
   }
 }
-
+//Funcion que obtiene cuentas de usuario
+export async function getidWithid(id){
+  let response= await fetch(url+'api/Usuario?UsuarioId='+id);
+  let responseJson= await response.json();
+  if(responseJson!=null){
+    id= responseJson.UsuarioId;
+    return id;
+  }else{
+    Alert.alert('no existe ese correo');
+  }
+}
+//Función que Registra Una Cuenta Usuario
+export async function CrearCuentaUsuario(idUsuario,idJuego,Nombre){
+  fetch(url+'api/CuentasJuego', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      NombreCuenta:Nombre,
+      JuegoId: idJuego,
+      UsuarioId: idUsuario,
+    })
+  })
+  .catch(error =>console.error('Error: ',error))
+  .then(response=> console.log('Success: '+json.stringify(response)))
+  ;
+}
 //Función que Registra un usuario
 export function CrearUsuario(Correo,contra,Nick,desc){
     fetch(url+'api/Usuario', {

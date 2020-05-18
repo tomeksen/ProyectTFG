@@ -43,6 +43,15 @@ namespace BBDD.Repositorys
                 return null;
             }
         }
+        internal CuentaJuego getWithEmail(int idUsu)
+        {
+            CuentaJuego usu = new CuentaJuego();
+            using (GareonContext context = new GareonContext())
+            {
+                usu = context.CuentaJuegos.Where(x => x.UsuarioId == idUsu).FirstOrDefault();
+            }
+            return usu;
+        }
         internal string Save(CuentaJuego cuentaJuego)
         {
             CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
