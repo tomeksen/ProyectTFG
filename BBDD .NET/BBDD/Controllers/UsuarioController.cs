@@ -49,8 +49,11 @@ namespace BBDD.Controllers
         }
 
         // PUT: api/Usuario/5
-        public void Put(int id, [FromBody]string value)
+        public string Put(int id, [FromBody]Usuario usuario)
         {
+            var repo = new UsuarioRepository();
+            string respuesta = repo.Put(id, usuario);
+            return respuesta;
         }
 
         // DELETE: api/Usuario/5

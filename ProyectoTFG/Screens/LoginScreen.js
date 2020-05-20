@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert} from 'react-native';
+import { StyleSheet, Text, View, Alert, ImageBackground} from 'react-native';
 import {useEffect} from 'react';
-import { Input,Button } from 'react-native-elements';
+import { Input,Button,Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
 import runCrypto, { CryptoComprobador } from '../Components/Encrypter';
@@ -76,8 +76,15 @@ register = () => {
 
 render() {
     return (
-      <View style={styles.container}>
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
+        <ImageBackground
+        source={require('../Imagenes/Login.png')}
+        style={{flex:1}}
+        >
+          <Image
+          source={require('../Imagenes/758245.png')}
+          style={{height:300,width:300,marginBottom:30,marginTop:-140}}
+          />
           <Input
             containerStyle={{width:scale(220)}}
             placeholder={"Email"}
@@ -117,9 +124,10 @@ render() {
             onPress={()=>this.login()}
           />
           <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={()=>this.props.navigation.navigate('register')}>Crear cuenta</Text>
+        </ImageBackground>
         </View>
   
-      </View>
+
     )
     
     }
