@@ -5,7 +5,7 @@ import { Input,Button,Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
 import runCrypto, { CryptoComprobador } from '../Components/Encrypter';
-import {getidWithEmail} from '../Components/ConexionBBDD';
+import {getidWithEmail,getnickydescWithEmail} from '../Components/ConexionBBDD';
 
 let registrarse = "o registrarse"
 export default class LoginScreen extends Component {
@@ -62,8 +62,11 @@ export default class LoginScreen extends Component {
     var confirmador = await CryptoComprobador(this.state.password,this.state.Email);
   if(confirmador=='true'){
     let id= await getidWithEmail(this.state.Email)
+    let duo =await getnickydescWithEmail(this.state.Email)
     global.correoUsu=this.state.Email
     global.idUsuario=id
+    global.desc=duo.second
+    global.nick=duo.first
     this.props.navigation.navigate('HomeBottomNavigatorUsers', { data : this.state.Email });
     
   }
@@ -79,7 +82,7 @@ render() {
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
         <ImageBackground
         source={require('../Imagenes/Login.png')}
-        style={{flex:1}}
+        style={{height:'100%',width:'100%',alignContent:'center',alignItems:'center',justifyContent:'center'}}
         >
           <Image
           source={require('../Imagenes/758245.png')}
@@ -119,11 +122,12 @@ render() {
           <Button 
             containerStyle={{width:scale(150)}}
             title="Log In"
+            titleStyle={{color:"black"}}
             color="#f194ff"
             type="clear"
             onPress={()=>this.login()}
           />
-          <Text style={{fontSize:15,marginTop:25,color:'blue'}} onPress={()=>this.props.navigation.navigate('register')}>Crear cuenta</Text>
+          <Text style={{fontSize:15,marginTop:25,color:'black',fontWeight:'bold'}} onPress={()=>this.props.navigation.navigate('register')}>Crear cuenta</Text>
         </ImageBackground>
         </View>
   

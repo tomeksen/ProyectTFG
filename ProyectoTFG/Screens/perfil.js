@@ -11,9 +11,9 @@ export default class perfil extends Component{
   constructor(props) {
     super(props);
     this.state = {
-        nickname:"",
+        nickname:global.nick,
         email: global.correoUsu,
-        Descripcion:"hola soy peru y soy el mayor campeon hola soy peru y soy el mayor campeonhola soy peru y soy el mayor campeonhola soy peru y soy el mayor campeonhola soy peru y soy el mayor campeon",
+        Descripcion: global.desc,
         cuentasjuegos:null,
         setModalVisible:false,
         setModal1Visible:false

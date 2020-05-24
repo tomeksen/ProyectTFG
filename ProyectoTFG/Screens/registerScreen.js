@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert,ImageBackground,Image } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { scale } from '../Components/ScalingComps';
@@ -64,10 +64,19 @@ export default class RegisterScreen extends Component {
       return (
   
         <View style={styles.container}>
+            <ImageBackground
+          source={require('../Imagenes/Login.png')}
+          style={{height:'100%',width:'100%',alignContent:'center',alignItems:'center',justifyContent:'center'}}
+          >
           <Icon 
           name='arrow-left'
+          style={{alignSelf:'flex-start',marginLeft:15,marginTop:-50}}
           size={30}
           onPress={()=>this.props.navigation.navigate('login')}
+          />
+          <Image
+          source={require('../Imagenes/758245.png')}
+          style={{height:300,width:300,marginBottom:30,marginTop:-140}}
           />
           <Input
             containerStyle={{width:260}}
@@ -118,7 +127,8 @@ export default class RegisterScreen extends Component {
           <Button 
             containerStyle={{width:scale(150)}}
             title="Press me"
-            color="#f194ff"
+            titleStyle={{color:"black"}}
+            color="black"
             type="clear"
             onPress={()=> {
               this.register()
@@ -127,6 +137,7 @@ export default class RegisterScreen extends Component {
           <Text>{this.state.Nickname}</Text>
           <Text>{this.state.password}</Text>
           <Text>{this.state.Email}</Text>
+          </ImageBackground>
         </View>
       );
     }

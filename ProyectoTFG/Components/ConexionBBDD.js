@@ -1,5 +1,6 @@
 import { Alert } from 'react-native';
 const url= 'http://10.0.2.2:44377/';
+
 //Función conseguir contraseña
 export async function getidWithEmail(Email){
   let response= await fetch(url+'api/Usuario?Email='+Email);
@@ -11,6 +12,21 @@ export async function getidWithEmail(Email){
     Alert.alert('no existe ese correo');
   }
 }
+export async function getnickydescWithEmail(Email){
+  let response= await fetch(url+'api/Usuario?Email='+Email);
+  let responseJson= await response.json();
+  if(responseJson!=null){
+    nick= responseJson.Nickname;
+    Descr= responseJson.Descripcion;
+    return {
+      first: nick,
+      second:Descr
+  }
+  }else{
+    Alert.alert('no existe ese correo');
+  }
+}
+//funcion conseguir contraseña con user
 export async function getPassWithUser(Email)
 {
 pass='';
@@ -158,4 +174,24 @@ if(responseJson==null){
 }else{
   Alert.alert('El correo esta en uso');
 }
+}
+//funcion cambiar profile
+export async function CambiarProf(id,correo,descrip,nick){
+  await fetch(url+'api/Usuario/5', {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      UsuarioId:id,
+      Email:correo,
+      Descripcion:descrip,
+      Nickname:nick
+
+    })
+  })
+  .catch(error =>console.error('Error: ',error))
+  .then(response=> console.log('Success: '+json.stringify(response)))
+  ;
 }

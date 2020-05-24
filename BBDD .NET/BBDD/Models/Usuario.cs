@@ -11,7 +11,7 @@ namespace BBDD.Models
         {
 
         }
-        public Usuario(int idUsuario, string email, string password, string nickname, string[] amigos, string descripcion)
+        public Usuario(int idUsuario, string email, string password, string nickname, string amigos, string descripcion)
         {
             UsuarioId = idUsuario;
             Email = email;
@@ -24,7 +24,7 @@ namespace BBDD.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Nickname { get; set; }
-        public string[] Amigos { get; set; }
+        public string Amigos { get; set; }
         public string Descripcion { get; set; }
         public List<CuentaJuego> CuentaJuegos { get; set; }
 

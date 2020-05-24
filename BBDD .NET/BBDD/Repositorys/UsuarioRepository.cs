@@ -131,7 +131,7 @@ namespace BBDD.Repositorys
             context2.SaveChanges();
             return "El usuario se ha creado";
         }
-        internal string Put(int id,Usuario usu)
+        internal string Put(Usuario usu)
         {
             CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
             cullInfo.NumberFormat.NumberDecimalSeparator = ".";
@@ -141,7 +141,7 @@ namespace BBDD.Repositorys
             System.Threading.Thread.CurrentThread.CurrentCulture = cullInfo;
             using(GareonContext context= new GareonContext())
             {
-                var existingUsu = context.Usuarios.Where(s => s.UsuarioId == id).FirstOrDefault<Usuario>();
+                var existingUsu = context.Usuarios.Where(s => s.UsuarioId == usu.UsuarioId).FirstOrDefault<Usuario>();
                 if (existingUsu != null)
                 {
                     existingUsu.Email = usu.Email;

@@ -1,17 +1,17 @@
 import React,{Component} from 'react';
-import{View,Text,StyleSheet,Dimensions,Modal,TextInput} from 'react-native';
+import{View,Text,StyleSheet,Dimensions,Modal,TextInput, Alert} from 'react-native';
 import { WebView } from 'react-native-webview';
 import {Header,Icon,Input,Button} from 'react-native-elements';
-
+import {CambiarProf} from '../Components/ConexionBBDD'
 const webViewHeight=Dimensions.get('window').height - 56;
 
 export class ModalForms extends Component{
     constructor(props){
         super(props);
         this.state = {
-            nickname:"",
+            nickname:global.nick,
             email: global.correoUsu,
-            Descripcion:"",
+            Descripcion:global.desc,
         }
     }
 
@@ -51,6 +51,7 @@ export class ModalForms extends Component{
                                 containerStyle={{marginTop:30}}
                                 label="Nickname"
                                 placeholder={this.state.nickname}
+                                value={this.state.nickname}
                                 onChangeText={value=>this.setState({nickname:value})}
                             />
                         </View>
@@ -58,6 +59,7 @@ export class ModalForms extends Component{
                             <Input
                             label="Email"
                              placeholder={this.state.email}
+                             value={this.state.email}
                              onChangeText={value=>this.setState({email:value})}
                             />
                         </View>
@@ -69,6 +71,7 @@ export class ModalForms extends Component{
                                 numberOfLines={4}
                                 maxLength={120}
                                 placeholder={this.state.Descripcion}
+                                value={this.state.Descripcion}
                                 onChangeText={value=>this.setState({Descripcion:value})}
                                 
                             />
@@ -76,6 +79,7 @@ export class ModalForms extends Component{
                         <View>
                             <Button
                                 title="Cambiar Perfil"
+                                onPress={()=>{if(this.state.nickname!=""&&this.state.email!=""&&this.state.Descripcion!=""){ CambiarProf(global.idUsuario,this.state.email,this.state.Descripcion,this.state.nickname)}else{Alert.alert("rellena los campos")}}}
                             />
                         </View>
                     </View>
