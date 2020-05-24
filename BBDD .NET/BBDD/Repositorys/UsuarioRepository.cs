@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Globalization;
 using System.Runtime.InteropServices.ComTypes;
-
+using System.Web.Http;
 namespace BBDD.Repositorys
 {
     public class UsuarioRepository
@@ -156,28 +156,5 @@ namespace BBDD.Repositorys
             }
             return "no ha funcionado";
         }
-        /*internal string PutAmigos(Usuario usu)
-        {
-            CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
-            cullInfo.NumberFormat.NumberDecimalSeparator = ".";
-            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
-            cullInfo.NumberFormat.PercentDecimalSeparator = ".";
-            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
-            System.Threading.Thread.CurrentThread.CurrentCulture = cullInfo;
-            using (GareonContext context = new GareonContext())
-            {
-                var existingUsu = context.Usuarios.Where(s => s.UsuarioId == usu.UsuarioId).FirstOrDefault<Usuario>();
-                if (existingUsu != null)
-                {
-                    existingUsu.Amigos = usu.Amigos;
-                    context.SaveChanges();
-                }
-                else
-                {
-                    return "No se ha encontrado";
-                }
-            }
-            return "no ha funcionado";
-        }*/
     }
 }

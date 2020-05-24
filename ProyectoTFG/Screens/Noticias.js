@@ -40,7 +40,7 @@ export default class Noticias extends Component {
   }
 
   getNews = async () => {
-        let articles= await fetch('http://newsapi.org/v2/everything?'+'q=juegos&'+'language=es&'+'pageSize=10&'+'apiKey=b51e135495fe48b6ba1fc1e575f9278d')
+        let articles= await fetch('http://newsapi.org/v2/everything?'+'q=juegos&'+'language=es&'+'pageSize=30&'+'apiKey=b51e135495fe48b6ba1fc1e575f9278d')
         let result= await articles.json()
         articles=null;
         let iwant= orderBy(result.articles,'publisedAt','desc');
@@ -65,6 +65,7 @@ render() {
             title={item.title}
             leftAvatar={{size:"large",source:{uri:item.urlToImage}}}
             bottomDivider
+            topDivider
             onPress={()=>this.handleItemDataOnPress(item)}
             />
 
