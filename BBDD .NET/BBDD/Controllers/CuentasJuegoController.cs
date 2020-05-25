@@ -18,9 +18,11 @@ namespace BBDD.Controllers
         }
 
         // GET: api/CuentasJuego/5
-        public string Get(int id)
+        public List<CuentaJuego> Get(int idusu)
         {
-            return "value";
+            var repo = new CuentaJuegoRepository();
+            List<CuentaJuego> respuesta = repo.getCuentaUser(idusu);
+            return respuesta;
         }
 
         // POST: api/CuentasJuego

@@ -43,7 +43,33 @@ namespace BBDD.Repositorys
                 return null;
             }
         }
-        internal CuentaJuego getWithEmail(int idUsu)
+        internal List<CuentaJuego> getCuentaUser(int idusu)
+        {
+            MySqlConnection con = Connect();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "select * from cuentajuegos where UsuarioId="+idusu+"";
+            try
+            {
+                con.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                CuentaJuego cuenta = null;
+                List<CuentaJuego> cuentas = new List<CuentaJuego>();
+                while (reader.Read())
+                {
+                    Debug.WriteLine("recuperado: " + reader.GetInt32(0) + " ," + reader.GetInt32(1) + " ," + reader.GetString(2));
+                    cuenta = new CuentaJuego(reader.GetString(2), reader.GetInt32(1), reader.GetInt32(0));
+                    cuentas.Add(cuenta);
+                }
+                return cuentas;
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e.Message);
+                Debug.WriteLine("error de conexion");
+                return null;
+            }
+        }
+        /*internal CuentaJuego getWithEmail(int idUsu)
         {
             CuentaJuego usu = new CuentaJuego();
             using (GareonContext context = new GareonContext())
@@ -51,7 +77,7 @@ namespace BBDD.Repositorys
                 usu = context.CuentaJuegos.Where(x => x.UsuarioId == idUsu).FirstOrDefault();
             }
             return usu;
-        }
+        }*/
         internal string Save(CuentaJuego cuentaJuego)
         {
             CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
