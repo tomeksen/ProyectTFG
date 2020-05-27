@@ -9,7 +9,7 @@ export async function getIdWithName(name){
     let id = resultid.id;
     let getplayerLeague = await fetch(url+'lol/league/v4/entries/by-summoner/'+id+api)
     let resultleague= await getplayerLeague.json();
-    
+    Alert.alert(resultleague[0].tier)
     let soloq= resultleague[0]
     let flexq=resultleague[1]
     return{
@@ -22,12 +22,13 @@ export async function getTftAcc(name){
     let idWithname= await fetch(url+'tft/summoner/v1/summoners/by-name/'+name+api)
     let resultid= await idWithname.json();
     let id= resultid.id;
-    let getplayerLeague = await fetch(url+'tft/league/v1/entries/by-summoner/'+id+api)
-    let resultleague= await getplayerLeague.json();
-    let tier = resultleague.tier;
-    let rank= resultleague.rank;
-    let wins= resultleague.wins;
-    let losses=resultleague.losses;
+    let gettftLeague = await fetch(url+'tft/league/v1/entries/by-summoner/'+id+api)
+    let resulttftleague= await gettftLeague.json();
+    let tft=resulttftleague[0]
+    let tier = tft.tier;
+    let rank= tft.rank;
+    let wins= tft.wins;
+    let losses=tft.losses;
     return{
         first:tier,
         second:rank,
