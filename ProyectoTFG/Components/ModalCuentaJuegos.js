@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import{View,Text,StyleSheet,Dimensions,Modal,TextInput} from 'react-native';
 import { WebView } from 'react-native-webview';
 import {Header,Icon,Input,Button,ButtonGroup} from 'react-native-elements';
+import {CrearCuentaUsuario} from '../Components/ConexionBBDD';
 
 const webViewHeight=Dimensions.get('window').height - 50;
 export class CuentaForms extends Component{
@@ -27,14 +28,17 @@ export class CuentaForms extends Component{
               <View style={{flex:0.25,marginTop:'15%',marginLeft:14,marginRight:14}}>
                     <Input
                         containerStyle={{marginTop:30}}
+                        maxLength={16}
                         label="Nombre de Juego"
                         placeholder={this.state.nombreCuenta}
+                        value={this.state.nombreCuenta}
                         onChangeText={value=>this.setState({nombreCuenta:value})}
                     />
                 </View>
                 <View style={{flex:0.25,marginTop:'25%',marginLeft:14,marginRight:14}}>
                     <Button
                         title="Añadir Cuenta"
+                        onPress={()=>{CrearCuentaUsuario(global.idUsuario,1,this.state.nombreCuenta), this.handleClose}}
                      />
                 </View>
             </View>
@@ -45,12 +49,14 @@ export class CuentaForms extends Component{
                         containerStyle={{marginTop:30}}
                         label="Nombre de Juego"
                         placeholder={this.state.nombreCuenta}
+                        value={this.state.nombreCuenta}
                         onChangeText={value=>this.setState({nombreCuenta:value})}
                     />
                 </View>
                 <View style={{flex:0.25,marginTop:'25%',marginLeft:14,marginRight:14}}>
                     <Button
                         title="Añadir Cuenta"
+                        onPress={()=>{CrearCuentaUsuario(global.idUsuario,3,this.state.nombreCuenta), this.handleClose}}
                      />
                 </View>
             </View>

@@ -97,5 +97,28 @@ namespace BBDD.Repositorys
             context2.SaveChanges();
             return "El usuario se ha creado";
         }
+        internal string Put(CuentaJuego cuenta)
+        {
+            CultureInfo cullInfo = new System.Globalization.CultureInfo("es-ES");
+            cullInfo.NumberFormat.NumberDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            cullInfo.NumberFormat.PercentDecimalSeparator = ".";
+            cullInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            System.Threading.Thread.CurrentThread.CurrentCulture = cullInfo;
+            using (GareonContext context = new GareonContext())
+            {
+                var existingUsu = context.CuentaJuegos.Where(s => s.UsuarioId == cuenta.UsuarioId).FirstOrDefault<CuentaJuego>();
+                if (existingUsu != null)
+                {
+                    existingUsu.NombreCuenta = cuenta.NombreCuenta;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    return "No se ha encontrado";
+                }
+            }
+            return "no ha funcionado";
+        }
     }
 }

@@ -44,48 +44,7 @@ if(responseJson!=null){
   Alert.alert('no existe ese correo');
 }
 }
-//obtener amigos
-export async function obteneramigos(Email){
-  let response= await fetch(url+'api/Usuario?Email='+Email);
-  let responseJson= await response.json();
-  if(responseJson.Amigos!=null){
-    return responseJson.Amigos
-  }else{
-    return null
-  }
-}
-export async function AñadirAmigo(amigo,Email){
-  let response= await obteneramigos(Email)
-  if(response==null){
-  await fetch(url+'api/Usuario', {
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      Amigos: [amigo],
-    })
-  })
-  .catch(error =>console.error('Error: ',error))
-  .then(response=> console.log('Success: '+json.stringify(response)))
-  ;
-}else{
-  await fetch(url+'api/Usuario', {
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      Amigos: [response+','+amigo],
-    })
-  })
-  .catch(error =>console.error('Error: ',error))
-  .then(response=> console.log('Success: '+json.stringify(response)))
-  ;
-}
-}
+
 //funcion obtener usuarios
 export async function ObtenerUsus(){
   let response= await fetch(url+'api/Usuario');
@@ -98,11 +57,10 @@ export async function ObtenerUsus(){
 }
 //Funcion que obtiene cuentas de usuario
 export async function getidWithid(id){
-  let response= await fetch(url+'api/Usuario?UsuarioId='+id);
+  let response= await fetch(url+'api/CuentasJuego?idusu='+id);
   let responseJson= await response.json();
   if(responseJson!=null){
-    id= responseJson.UsuarioId;
-    return id;
+    return responseJson;
   }else{
     Alert.alert('no existe ese correo');
   }
