@@ -67,7 +67,7 @@ render() {
                 title={item.Nickname}
                 subtitle={item.Descripcion}
                 bottomDivider
-                onPress={()=>this.handleItemDataOnPress(item)}
+                onPress={()=>{global.iditem=item.UsuarioId,this.handleItemDataOnPress(item)}}
                 />
               }
             }

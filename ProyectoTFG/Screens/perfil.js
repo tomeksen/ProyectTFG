@@ -34,15 +34,20 @@ export default class perfil extends Component{
     }
     this.getcuentas();
 }
+
 getcuentas=async()=>{
   
   let cuentasLOL= await getidWithid(global.idUsuario)
   let cuenta1= cuentasLOL[0].NombreCuenta
   let cuenta2= cuentasLOL[1].NombreCuenta
+  if(this.state.Cuentajuego1==""||this.state.Cuentajuego2==""){
   this.setState({Cuentajuego1:cuenta1, Cuentajuego2:cuenta2})
+  }
   let cuentastft= await getTftAcc(cuenta2)
   let getLol= await getIdWithName(cuenta1)
+  if(this.state.soloQ=={}&&this.state.flexQ=={}&&this.state.tftSoloQ=={}){
   this.setState({soloQ:getLol.first,flexQ:getLol.second, tftSoloQ:cuentastft})
+  }
   
   if(getLol.first!=null){
   if(getLol.first.tier=="IRON"){
