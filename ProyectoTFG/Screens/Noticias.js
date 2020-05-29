@@ -57,11 +57,11 @@ render() {
     </View>
   ) : (
     <FlatList
-            style={{alignSelf:"center",width:'100%',backgroundColor:'#645754'}}
+            style={{alignSelf:"center",width:'100%',backgroundColor:'#3D5F8A'}}
             data={this.state.data}
             renderItem={({item}) => 
             <ListItem
-            containerStyle={{flex:1,backgroundColor:'#645754'}}
+            containerStyle={{flex:1,backgroundColor:'#3D5F8A'}}
             title={item.title}
             leftAvatar={{size:"large",source:{uri:item.urlToImage}}}
             bottomDivider
@@ -75,6 +75,7 @@ render() {
   )
     return (
       <View style={styles.container}>
+        <Text style={{textAlign:"center",fontSize:25,fontWeight:"bold",marginTop:5}}>Noticias del dia</Text>
         <View style={{flex:1,width:'100%',margin:15,marginBottom:0}}>
           {view}
         </View>
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#645754",
+    backgroundColor: "#5EA1F6",
   },
 
   button: {

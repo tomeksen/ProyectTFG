@@ -126,7 +126,7 @@ export default class RegisterScreen extends Component {
             />
           <Button 
             containerStyle={{width:scale(150)}}
-            title="Press me"
+            title="Registrarse"
             titleStyle={{color:"black"}}
             color="black"
             type="clear"
@@ -134,9 +134,6 @@ export default class RegisterScreen extends Component {
               this.register()
             }}
           />
-          <Text>{this.state.Nickname}</Text>
-          <Text>{this.state.password}</Text>
-          <Text>{this.state.Email}</Text>
           </ImageBackground>
         </View>
       );

@@ -35,7 +35,7 @@ const homeScreensTab = {
 const NoticiasTab = {
   screen: Noticias,
   navigationOptions: ({ navigation }) => ({
-    title: 'Info',
+    title: 'Noticias',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       return <Ionicons name={'info'} size={25} color={tintColor} />;
     },
@@ -45,9 +45,9 @@ const NoticiasTab = {
 const perfilTab = {
   screen: perfil,
   navigationOptions: ({ navigation }) => ({
-    title: 'Map',
+    title: 'Perfil',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      return <Ionicons name={'info'} size={25} color={tintColor} />;
+      return <Ionicons name={'face'} size={25} color={tintColor} />;
     },
   }),
 };

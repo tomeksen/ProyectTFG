@@ -58,12 +58,12 @@ render() {
     </View>
   ) : (
     <FlatList
-              style={{alignSelf:"center",width:'100%',backgroundColor:'#645754'}}
+              style={{alignSelf:"center",width:'100%',backgroundColor:'#3D5F8A'}}
               data={this.state.data}
               renderItem={({item}) => {
               if(item.Email!=global.correoUsu){
                 return <ListItem
-                containerStyle={{flex:1,backgroundColor:'#645754'}}
+                containerStyle={{flex:1,backgroundColor:'#3D5F8A'}}
                 title={item.Nickname}
                 subtitle={item.Descripcion}
                 bottomDivider
@@ -76,7 +76,8 @@ render() {
           /> 
   )
     return (
-      <View style={{flex:1,alignItems:"center"}}>
+      <View style={{flex:1,alignItems:"center",backgroundColor:'#5EA1F6'}}>
+        <Text style={{textAlign:"center",fontSize:25,fontWeight:"bold",marginTop:5}}>Menu</Text>
         <View style={{width:'100%'}}>
           {view}
         </View>

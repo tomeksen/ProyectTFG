@@ -105,7 +105,7 @@ render() {
             />
             <Input
             containerStyle={{width:scale(220)}}
-            placeholder={"Password"}
+            placeholder={"Contraseña"}
             secureTextEntry={true}
             leftIcon={
               <Icon
@@ -121,7 +121,7 @@ render() {
             />
           <Button 
             containerStyle={{width:scale(150)}}
-            title="Log In"
+            title="Entrar"
             titleStyle={{color:"black"}}
             color="#f194ff"
             type="clear"

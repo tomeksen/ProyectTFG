@@ -125,6 +125,19 @@ export class ModalProf extends Component{
         
       }
     handleClose=async()=>{
+      this.setState({
+        isLoading:false,
+        Cuentajuego1:"",
+        Cuentajuego2:"",
+        soloQ:{},
+        flexQ:{},
+        tftSoloQ:{},
+        urphototft:"",
+        urlphoto:"",
+        urlphoto1:"",
+        eloSoloq:"",
+        eloflexQ:"",
+        eloTft:"",})
         return this.props.onClose();
     }
 

@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 
 const url= 'https://euw1.api.riotgames.com/';
-const api='?api_key=RGAPI-1de0559f-1092-4260-a17a-7cc8949646dc';
+const api='?api_key=RGAPI-1f67ed7c-2489-4881-9632-a738fb5e596a';
 
 export async function getIdWithName(name){
     let idWithname= await fetch(url+'lol/summoner/v4/summoners/by-name/'+name+api)
